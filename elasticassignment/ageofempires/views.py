@@ -7,7 +7,5 @@ from .models import Civilization
 from elasticsearch_dsl.connections import connections
 from elasticsearch.helpers import bulk
 
-
-
 def civilizations(request):
     return render(request, 'ageofempires/civilizations.html' )

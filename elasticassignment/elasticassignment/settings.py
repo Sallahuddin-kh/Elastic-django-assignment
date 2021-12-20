@@ -134,8 +134,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticFiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+ELASTIC_HOST = 'localhost:9200'
+
 ELASTICSEARCH_DSL={
     'default': {
-        'hosts': 'localhost:9200'
+        'hosts': ELASTIC_HOST
     },
 }
