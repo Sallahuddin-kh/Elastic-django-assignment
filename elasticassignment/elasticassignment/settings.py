@@ -13,6 +13,20 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import django
+import environ
+
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
+
+ELASTIC_HOST = env("ELASTIC_HOST")
+NUMBER_OF_SHARDS = env("NUMBER_OF_SHARDS")
+NUMBER_OF_REPLICAS = env("NUMBER_OF_REPLICAS")
+CONFIG = {
+    'host': ELASTIC_HOST
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,7 +52,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_elasticsearch_dsl',
     'ageofempires',
 ]
 
@@ -73,18 +86,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'elasticassignment.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -133,11 +134,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticFiles')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-ELASTIC_HOST = 'localhost:9200'
-
-ELASTICSEARCH_DSL={
-    'default': {
-        'hosts': ELASTIC_HOST
-    },
-}
