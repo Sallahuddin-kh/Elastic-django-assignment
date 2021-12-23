@@ -6,6 +6,6 @@ from django.core.management.base import BaseCommand
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        url = settings.AOE_BASE_URL + settings.DATA_URLS['STRUCTURES']
+        url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['STRUCTURES']
         Structures.Structures.make_index()
         Structures.Structures.populate_index(url)

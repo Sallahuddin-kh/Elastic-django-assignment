@@ -5,6 +5,6 @@ from django.conf import settings
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        url = settings.AOE_BASE_URL + settings.DATA_URLS['CIVILIZATIONS']
+        url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['CIVILIZATIONS']
         Civilizations.Civilizations.make_index()
         Civilizations.Civilizations.populate_index(url)

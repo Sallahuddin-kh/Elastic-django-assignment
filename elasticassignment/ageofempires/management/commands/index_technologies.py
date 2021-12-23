@@ -5,6 +5,6 @@ from django.conf import settings
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        url = settings.AOE_BASE_URL + settings.DATA_URLS['TECHNOLOGIES']    
+        url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['TECHNOLOGIES']    
         Technologies.Technologies.make_index()
         Technologies.Technologies.populate_index(url)

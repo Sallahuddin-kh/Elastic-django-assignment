@@ -29,7 +29,7 @@ CONFIG = {
 
 #Loading api urls
 AOE_BASE_URL=env("AOE_BASE_URL")
-DATA_URLS = {
+AOE_ENDPOINTS = {
     'CIVILIZATIONS' : '/api/v1/civilizations',
     'STRUCTURES' : '/api/v1/structures',
     'TECHNOLOGIES' : '/api/v1/technologies',
