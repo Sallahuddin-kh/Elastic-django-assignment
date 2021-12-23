@@ -1,8 +1,11 @@
 from django.core.management.base import BaseCommand
-import ageofempires.management.commands.command_classes as command_classes
+import ageofempires.models.structures as Structures
+from django.conf import settings
+from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        command_classes.Structures.make_index()
-        command_classes.Structures.populate_index("https://age-of-empires-2-api.herokuapp.com/api/v1/structures")
+        url = settings.AOE_BASE_URL + settings.DATA_URLS['STRUCTURES']
+        Structures.Structures.make_index()
+        Structures.Structures.populate_index(url)

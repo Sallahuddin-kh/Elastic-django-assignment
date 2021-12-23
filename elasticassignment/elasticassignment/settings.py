@@ -27,6 +27,15 @@ CONFIG = {
     'host': ELASTIC_HOST
 }
 
+#Loading api urls
+AOE_BASE_URL=env("AOE_BASE_URL")
+DATA_URLS = {
+    'CIVILIZATIONS' : '/api/v1/civilizations',
+    'STRUCTURES' : '/api/v1/structures',
+    'TECHNOLOGIES' : '/api/v1/technologies',
+    'UNITS' : '/api/v1/units'
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

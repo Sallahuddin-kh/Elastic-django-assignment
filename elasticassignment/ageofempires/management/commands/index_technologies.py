@@ -1,8 +1,10 @@
 from django.core.management.base import BaseCommand
-import ageofempires.management.commands.command_classes as command_classes
+import ageofempires.models.technologies as Technologies
+from django.conf import settings
 
 class Command(BaseCommand):
 
-    def handle(self, *args, **kwargs):        
-        command_classes.Technologies.make_index()
-        command_classes.Technologies.populate_index("https://age-of-empires-2-api.herokuapp.com/api/v1/technologies")
+    def handle(self, *args, **kwargs):
+        url = settings.AOE_BASE_URL + settings.DATA_URLS['TECHNOLOGIES']    
+        Technologies.Technologies.make_index()
+        Technologies.Technologies.populate_index(url)
