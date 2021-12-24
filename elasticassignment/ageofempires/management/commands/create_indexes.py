@@ -5,7 +5,11 @@ import ageofempires.models.unit as Unit
 from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
-
+    """
+    Command creates all the indexes at once.
+    No parameter required.
+    >> python manage.py create_indexes
+    """
     def handle(self, *args, **kwargs):
         civ_intance = Civilization.Civilization()
         struc_instance = Structure.Structure()

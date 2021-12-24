@@ -4,15 +4,28 @@ import ageofempires.ElasticClient.index_config as conf
 class Technology():
 
     def __init__(self):
+        """
+        Constructor creates an instance with elasticsearch client
+        """
         self.client = Client.Client()
 
     def bulk_index(self, data:list):
+        """
+        Inserts data into Technology index
+        """
         self.client.index_data(data)
 
     def make_index(self):
+        """
+        Creates the Technology index
+        """
         settings = conf.get_index_settings()
         mappings = conf.get_index_mappings('technologies')
         self.client.create_index('technologies',settings,mappings)
 
     def get_objects(self):
+        """
+        Retrieves the Technology objects from
+        the index
+        """
         return self.client.get_data('technologies')

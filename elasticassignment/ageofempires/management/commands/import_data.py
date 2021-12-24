@@ -7,7 +7,15 @@ from django.conf import settings
 import ageofempires.HTTPClient.HTTPClient as HTTPClient
 
 class Command(BaseCommand):
-
+    """
+    Command to index data. Date is retrieved from online
+    API. Work with and without parameters.
+    >> python manage.py import_data
+    >> python manage.py import_data --import_name civilization
+    >> python manage.py import_data --import_name structures
+    >> python manage.py import_data --import_name technologies
+    >> python manage.py import_data --import_name units
+    """
     def add_arguments(self, parser):
         parser.add_argument('-i', '--import_name', type=str, help='Define the index to insert data')
 
@@ -31,6 +39,9 @@ class Command(BaseCommand):
             self.index_units()
 
     def index_civilizations(self):
+        """
+        Inserts data into civilizations index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['CIVILIZATIONS']
         data_list = HTTPClient.HTTPClient.get(url)
         civ_instance = Civilization.Civilization()
@@ -47,6 +58,9 @@ class Command(BaseCommand):
             civ_instance.bulk_index(civilization_list[i:i+batch_size])
 
     def index_structures(self):
+        """
+        Inserts data into structures index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['STRUCTURES']
         data_list = HTTPClient.HTTPClient.get(url)
         str_instance = Structure.Structure()
@@ -66,6 +80,9 @@ class Command(BaseCommand):
             str_instance.bulk_index(structures_list[i:i+batch_size])
 
     def index_technologies(self):
+        """
+        Inserts data into technologies index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['TECHNOLOGIES']
         data_list = HTTPClient.HTTPClient.get(url)
         tech_instance = Technology.Technology()
@@ -82,6 +99,9 @@ class Command(BaseCommand):
             tech_instance.bulk_index(technologies_list[i:i+batch_size])
 
     def index_units(self):
+        """
+        Inserts data into units index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['UNITS']
         data_list = HTTPClient.HTTPClient.get(url) 
         unit_instance = Unit.Unit()
