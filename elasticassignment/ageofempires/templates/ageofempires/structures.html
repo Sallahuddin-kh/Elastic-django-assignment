@@ -1,0 +1,55 @@
+    {% include 'ageofempires/generic.html' %}
+    {% load get_key %}
+    <h1>Structures</h1>
+    <div class="container">
+      <div class="row">
+        {% block content %}
+          {% if structures_list %}
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Armor</th>
+                      <th>Attack</th>
+                      <th>Build Time</th>
+                      <th>Cost</th>
+                      <th>Description</th>
+                      <th>Expansion</th>
+                      <th>Hit points</th>
+                      <th>Line of sight</th>
+                      <th>Reload time</th>
+                      <th>Special</th>
+                      <th>Structure range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for structure in structures_list %}
+                    <tr>
+                      <td>{{structure|get_key:"id"}}</td>
+                      <td>{{structure|get_key:"name"}}</td>
+                      <td>{{structure|get_key:"age"}}</td>
+                      <td>{{structure|get_key:"armor"}}</td>
+                      <td>{{structure|get_key:"attack"}}</td>
+                      <td>{{structure|get_key:"build_time"}}</td>
+                      <td>{% for cost in structure|get_dict_key_vals_pairs:"cost"%}<ul>{{cost}}</ul>{%endfor%}</td>
+                      <td>{{structure|get_key:"description"}}</td>
+                      <td>{{structure|get_key:"expansion"}}</td>
+                      <td>{{structure|get_key:"hit_points"}}</td>
+                      <td>{{structure|get_key:"line_of_sight"}}</td>
+                      <td>{{structure|get_key:"reload_time"}}</td>
+                      <td>{% for special in structure|get_key:"special"%}<ul>{{special}}</ul>{%endfor%}</td>
+                      <td>{{structure|get_key:"structure_range"}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          {% else %}
+            <p>There are no structures.</p>
+          {% endif %} 
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

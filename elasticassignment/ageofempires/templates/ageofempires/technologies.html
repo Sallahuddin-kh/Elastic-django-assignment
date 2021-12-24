@@ -1,0 +1,44 @@
+    {% include 'ageofempires/generic.html' %}
+    {% load get_key %}
+    <h1>Technologies</h1>
+    <div class="container">
+      <div class="row">
+        {% block content %}
+          {% if technologies_list %}
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Applies to</th>
+                      <th>Build Time</th>
+                      <th>Cost</th>
+                      <th>Description</th>
+                      <th>Develops in</th>
+                      <th>Expansion</th>
+                </thead>
+                <tbody>
+                  {% for technology in technologies_list %}
+                    <tr>
+                      <td>{{technology|get_key:"id"}}</td>
+                      <td>{{technology|get_key:"name"}}</td>
+                      <td>{{technology|get_key:"age"}}</td>
+                      <td>{% for applies_to in technology|get_key:"applies_to"%}<ul>{{applies_to}}</ul>{%endfor%}</td>
+                      <td>{{technology|get_key:"build_time"}}</td>
+                      <td>{% for cost in technology|get_dict_key_vals_pairs:"cost"%}<ul>{{cost}}</ul>{%endfor%}</td>
+                      <td>{{technology|get_key:"description"}}</td>
+                      <td>{{technology|get_key:"develops_in"}}</td>
+                      <td>{{technology|get_key:"expansion"}}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          {% else %}
+            <p>There are no technologies.</p>
+          {% endif %} 
+        {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
