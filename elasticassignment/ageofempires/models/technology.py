@@ -21,7 +21,7 @@ class Technology():
         """
         settings = conf.get_index_settings()
         mappings = conf.get_index_mappings('technologies')
-        self.client.create_index('technologies',settings,mappings)
+        self.client.create_index('technologies', settings, mappings)
 
     def get_objects(self):
         """

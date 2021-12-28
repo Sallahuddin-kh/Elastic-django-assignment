@@ -21,7 +21,7 @@ class Unit():
         """
         settings = conf.get_index_settings()
         mappings = conf.get_index_mappings('units')
-        self.client.create_index('units',settings,mappings)
+        self.client.create_index('units', settings, mappings)
 
     def get_objects(self):
         """

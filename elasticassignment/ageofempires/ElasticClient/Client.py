@@ -24,7 +24,7 @@ class Client:
         index_name is the name of the index from
         which has to retrieved
         """
-        res = self.__connection.search(index= index_name, query={"match_all": {}},size = 1000)
+        res = self.__connection.search(index= index_name, query={"match_all": {}}, size = 1000)
         return res
 
     def create_index(self,index_name:str,settings:dict,mappings:dict):

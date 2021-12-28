@@ -23,7 +23,7 @@ class Civilization():
         """
         settings = conf.get_index_settings()
         mappings = conf.get_index_mappings('civilizations')
-        self.client.create_index('civilizations',settings,mappings)
+        self.client.create_index('civilizations' , settings , mappings)
 
     def get_objects(self):
         """

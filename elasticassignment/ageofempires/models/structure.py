@@ -21,7 +21,7 @@ class Structure():
         """
         settings = conf.get_index_settings()
         mappings = conf.get_index_mappings('structures')
-        self.client.create_index('structures',settings,mappings)
+        self.client.create_index('structures', settings, mappings)
 
     def get_objects(self):
         """

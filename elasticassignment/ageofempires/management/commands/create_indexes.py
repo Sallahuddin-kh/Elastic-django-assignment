@@ -1,7 +1,7 @@
-import ageofempires.models.civilization as Civilization
-import ageofempires.models.structure as Structure
-import ageofempires.models.technology as Technology
-import ageofempires.models.unit as Unit
+from ageofempires.models.civilization import Civilization
+from ageofempires.models.structure import Structure
+from ageofempires.models.technology import Technology
+from ageofempires.models.unit import Unit
 from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
@@ -11,11 +11,11 @@ class Command(BaseCommand):
     >> python manage.py create_indexes
     """
     def handle(self, *args, **kwargs):
-        civ_intance = Civilization.Civilization()
-        struc_instance = Structure.Structure()
-        tech_instance = Technology.Technology()
-        uni_instance = Unit.Unit()
-        civ_intance.make_index()
-        struc_instance.make_index()
-        tech_instance.make_index()
-        uni_instance.make_index()
+        civilization_instance = Civilization()
+        structure_instance = Structure()
+        technology_instance = Technology()
+        unit_instance = Unit()
+        civilization_instance.make_index()
+        structure_instance.make_index()
+        technology_instance.make_index()
+        unit_instance.make_index()
