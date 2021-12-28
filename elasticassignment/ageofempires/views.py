@@ -18,7 +18,7 @@ def civilizations(request:HttpRequest):
 
 def units(request:HttpRequest):
     """
-    Retrieves the civilization data and renders to template
+    Retrieves the units data and renders to template
     Gets the data from units model
     """
     unit_instance = Unit()
@@ -29,7 +29,7 @@ def units(request:HttpRequest):
 
 def structures(request:HttpRequest):
     """
-    Retrieves the civilization data and renders to template
+    Retrieves the structures data and renders to template
     Gets the data from structures model
     """
     structure_instance = Structure()
@@ -40,7 +40,7 @@ def structures(request:HttpRequest):
 
 def technologies(request:HttpRequest):
     """
-    Retrieves the civilization data and renders to template
+    Retrieves the technologies data and renders to template
     Gets the data from technologies model
     """
     technology_instance = Technology()
