@@ -47,11 +47,14 @@ class Command(BaseCommand):
         civlization_instance = Civilization()
         civilizations = data_list['civilizations']
         civilization_list = []
+        iterator = 1
         for civlization in civilizations:
             civ = {
+                "_id": iterator,
                 "_index" : "civilizations",
                 "_source" : civlization
             }
+            iterator = iterator + 1
             civilization_list.append(civ)
         batch_size = 20
         for i in range(0, len(civilization_list), batch_size):
@@ -66,14 +69,17 @@ class Command(BaseCommand):
         structure_instance = Structure()
         structures = data_list['structures']
         structures_list = []
+        iterator = 1
         for structure in structures:
             if 'range' in structure:
                 structure['structure_range'] = structure['range']
                 del structure['range']
             struc = {
+                "_id": iterator,
                 "_index": "structures",
                 "_source": structure
             }
+            iterator = iterator + 1
             structures_list.append(struc)
         batch_size = 20
         for i in range(0, len(structures_list), batch_size):
@@ -88,11 +94,14 @@ class Command(BaseCommand):
         technology_instance = Technology()
         technologies = data_list['technologies']
         technologies_list = []
+        iterator = 1
         for technology in technologies:
             tech = {
+                "_id": iterator,
                 "_index" : "technologies",
                 "_source" : technology
             }
+            iterator = iterator + 1
             technologies_list.append(tech)
         batch_size = 20
         for i in range(0, len(technologies_list), batch_size):
@@ -107,14 +116,17 @@ class Command(BaseCommand):
         unit_instance = Unit()
         units = data_list['units']
         units_list = []
+        iterator = 1
         for unit in units:
             if 'range' in unit:
                 unit['structure_range'] = unit['range']
                 del unit['range']
             uni = {
+                "_id": iterator,
                 "_index" : "units",
                 "_source" : unit
             }
+            iterator = iterator + 1
             units_list.append(uni)
         batch_size = 20
         for i in range(0, len(units_list), batch_size):
