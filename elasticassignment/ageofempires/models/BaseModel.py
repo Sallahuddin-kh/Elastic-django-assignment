@@ -1,21 +1,23 @@
-import ageofempires.ElasticClient.Client as Client
+from ageofempires.ElasticClient.Client import Client
 import ageofempires.ElasticClient.index_config as conf
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 
-class BaseModel():
-
-    @abstractmethod
-    def set_index_name(self):
-        """
-        Abstract method must be implemented in child classes
-        """
-        pass
+class BaseModel(ABC):
 
     def __init__(self):
         """
         Constructor creates an instance with elasticsearch client
+        Sets up the index_name variable accordingly.
         """
-        self.client = Client.Client()
+        self.client = Client()
+        self.index_name = self.get_index_name()
+
+    @abstractmethod
+    def get_index_name(self):
+        """
+        Abstract method must be implemented in child classes
+        """
+        raise NotImplementedError("Subclasses should Implement set_index_name")
 
     def bulk_index(self, data:list):
         """

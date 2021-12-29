@@ -2,15 +2,8 @@ from ageofempires.models.BaseModel import BaseModel
 
 class Unit(BaseModel):
 
-    def set_index_name(self):
+    def get_index_name(self):
         """
-        Sets an the index_name instance variable to model value
+        Gets the index_name according to model
         """
-        self.index_name = 'units'
-
-    def __init__(self):
-        """
-        Constructor calls the parent constructor and then set_index_method
-        """
-        super().__init__()
-        self.set_index_name()
+        return 'units'
