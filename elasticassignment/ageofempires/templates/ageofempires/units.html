@@ -1,0 +1,69 @@
+  {% include 'ageofempires/generic.html' %}
+  {% load get_key %}
+  <h1>Units</h1>
+  <div class="container">
+    <div class="row">
+      {% block content %}
+        {% if units_list %}
+          <table id="table_id" class="display">
+              <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Expansion</th>
+                    <th>Age</th>
+                    <th>Created In</th>
+                    <th>Cost</th>
+                    <th>Build time</th>
+                    <th>Reload Time</th>
+                    <th>Attack Delay</th>
+                    <th>Movement Rate</th>
+                    <th>line Of Sight</th>
+                    <th>Hit Points</th>
+                    <th>Attack</th>
+                    <th>Attack Bonus</th>
+                    <th>Armor</th>
+                    <th>Armor Bonus</th>
+                    <th>Accuracy</th>
+                    <th>Structure Range</th>
+                    <th>Blast Radius</th>
+                    <th>Search Radius</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for unit in units_list %}
+                  <tr>
+                    <td>{{unit|get_key:"id"}}</td>
+                    <td>{{unit|get_key:"name"}}</td>
+                    <td>{{unit|get_key:"description"}}</td>
+                    <td>{{unit|get_key:"expansion"}}</td>
+                    <td>{{unit|get_key:"age"}}</td>
+                    <td>{{unit|get_key:"created_in"}}</td>
+                    <td>{% for cost in unit|get_dict_key_vals_pairs:"cost"%}<ul>{{cost}}</ul>{%endfor%}</td>
+                    <td>{{unit|get_key:"build_time"}}</td>
+                    <td>{{unit|get_key:"reload_time"}}</td>
+                    <td>{{unit|get_key:"attack_delay"}}</td>
+                    <td>{{unit|get_key:"movement_rate"}}</td>
+                    <td>{{unit|get_key:"line_of_sight"}}</td>
+                    <td>{{unit|get_key:"hit_points"}}</td>
+                    <td>{{unit|get_key:"attack"}}</td>
+                    <td>{% for attack_bonus in unit|get_key:"attack_bonus"%}<ul>{{attack_bonus}}</ul>{%endfor%}</td>
+                    <td>{{unit|get_key:"armor"}}</td>
+                    <td>{{unit|get_key:"armor_bonus"}}</td>
+                    <td>{{unit|get_key:"accuracy"}}</td>
+                    <td>{{unit|get_key:"structure_range"}}</td>
+                    <td>{{unit|get_key:"blast_radius"}}</td>
+                    <td>{{unit|get_key:"search_radius"}}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+        {% else %}
+          <p>There are no civilizations.</p>
+        {% endif %} 
+      {% endblock %}
+    </div>
+  </div>
+  </body>
+</html>
