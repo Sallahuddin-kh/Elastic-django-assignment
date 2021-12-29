@@ -17,7 +17,7 @@ class BaseModel(ABC):
         """
         Abstract method must be implemented in child classes
         """
-        raise NotImplementedError("Subclasses should Implement set_index_name")
+        raise NotImplementedError("Subclasses should Implement get_index_name")
 
     def bulk_index(self, data:list):
         """
