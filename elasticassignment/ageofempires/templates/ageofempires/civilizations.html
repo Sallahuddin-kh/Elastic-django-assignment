@@ -1,8 +1,43 @@
-<html>
-  <head>
-    <title>Civilizations</title>
-  </head>
-  <body>
+    {% include 'ageofempires/generic.html' %}
+    {% load get_key %}
     <h1>Civilizations</h1>
+    <div class="container">
+      <div class="row">
+        {% block content %}
+          {% if civilization_list %}
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Expansion</th>
+                      <th>Army type</th>
+                      <th>Unique unit</th>
+                      <th>Unique tech</th>
+                      <th>Team Bonus</th>
+                      <th>Civilization Bonus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for civilization in civilization_list %}
+                    <tr>
+                      <td>{{civilization|get_key:"id"}}</td>
+                      <td>{{civilization|get_key:"name"}}</td>
+                      <td>{{civilization|get_key:"expansion"}}</td>
+                      <td>{{civilization|get_key:"army_type"}}</td>
+                      <td>{% for unique_unit in civilization|get_key:"unique_unit" %} <ul> {{unique_unit}} </ul>{% endfor %}</td>
+                      <td>{% for unique_tech in civilization|get_key:"unique_tech"%}<ul> {{unique_tech}} </ul>{% endfor %}</td>
+                      <td>{{civilization|get_key:"team_bonus"}}</td>
+                      <td>{% for civilization_bonus in civilization|get_key:"civilization_bonus"%}<ul> {{civilization_bonus}} </ul>{% endfor %}</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+          {% else %}
+            <p>There are no civilizations.</p>
+          {% endif %} 
+        {% endblock %}
+      </div>
+    </div>
   </body>
 </html>

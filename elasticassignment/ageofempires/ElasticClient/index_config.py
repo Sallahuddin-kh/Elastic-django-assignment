@@ -1,6 +1,9 @@
 from django.conf import settings
 
 def get_index_settings():
+    """
+    Creates the settings of index as a dictionary
+    """
     return {
         "index":{
             "number_of_shards" : settings.NUMBER_OF_SHARDS,
@@ -9,6 +12,11 @@ def get_index_settings():
     }
 
 def get_index_mappings(index_name:str):
+    """
+    Creates the mappings as a dictionary
+    receives the name of the index and returns
+    the mappings accordingly from helping methods.
+    """
     if index_name == 'civilizations':
         return get_civilization_mappings()
     elif index_name == 'structures':

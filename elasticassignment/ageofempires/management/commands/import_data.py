@@ -1,13 +1,21 @@
 from django.core.management.base import BaseCommand
-import ageofempires.models.civilization as Civilization
-import ageofempires.models.structure as Structure
-import ageofempires.models.technology as Technology
-import ageofempires.models.unit as Unit
+from ageofempires.models.civilization import Civilization
+from ageofempires.models.structure import Structure
+from ageofempires.models.technology import Technology
+from ageofempires.models.unit import Unit
 from django.conf import settings
-import ageofempires.HTTPClient.HTTPClient as HTTPClient
+from ageofempires.HTTPClient.HTTPClient import HTTPClient
 
 class Command(BaseCommand):
-
+    """
+    Command to index data. Date is retrieved from online
+    API. Work with and without parameters.
+    >> python manage.py import_data
+    >> python manage.py import_data --import_name civilizations
+    >> python manage.py import_data --import_name structures
+    >> python manage.py import_data --import_name technologies
+    >> python manage.py import_data --import_name units
+    """
     def add_arguments(self, parser):
         parser.add_argument('-i', '--import_name', type=str, help='Define the index to insert data')
 
@@ -31,9 +39,12 @@ class Command(BaseCommand):
             self.index_units()
 
     def index_civilizations(self):
+        """
+        Inserts data into civilizations index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['CIVILIZATIONS']
-        data_list = HTTPClient.HTTPClient.get(url)
-        civ_instance = Civilization.Civilization()
+        data_list = HTTPClient.get(url)
+        civlization_instance = Civilization()
         civilizations = data_list['civilizations']
         civilization_list = []
         for civlization in civilizations:
@@ -44,12 +55,15 @@ class Command(BaseCommand):
             civilization_list.append(civ)
         batch_size = 20
         for i in range(0, len(civilization_list), batch_size):
-            civ_instance.bulk_index(civilization_list[i:i+batch_size])
+            civlization_instance.bulk_index(civilization_list[i:i+batch_size])
 
     def index_structures(self):
+        """
+        Inserts data into structures index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['STRUCTURES']
-        data_list = HTTPClient.HTTPClient.get(url)
-        str_instance = Structure.Structure()
+        data_list = HTTPClient.get(url)
+        structure_instance = Structure()
         structures = data_list['structures']
         structures_list = []
         for structure in structures:
@@ -63,12 +77,15 @@ class Command(BaseCommand):
             structures_list.append(struc)
         batch_size = 20
         for i in range(0, len(structures_list), batch_size):
-            str_instance.bulk_index(structures_list[i:i+batch_size])
+            structure_instance.bulk_index(structures_list[i:i+batch_size])
 
     def index_technologies(self):
+        """
+        Inserts data into technologies index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['TECHNOLOGIES']
-        data_list = HTTPClient.HTTPClient.get(url)
-        tech_instance = Technology.Technology()
+        data_list = HTTPClient.get(url)
+        technology_instance = Technology()
         technologies = data_list['technologies']
         technologies_list = []
         for technology in technologies:
@@ -79,12 +96,15 @@ class Command(BaseCommand):
             technologies_list.append(tech)
         batch_size = 20
         for i in range(0, len(technologies_list), batch_size):
-            tech_instance.bulk_index(technologies_list[i:i+batch_size])
+            technology_instance.bulk_index(technologies_list[i:i+batch_size])
 
     def index_units(self):
+        """
+        Inserts data into units index
+        """
         url = settings.AOE_BASE_URL + settings.AOE_ENDPOINTS['UNITS']
-        data_list = HTTPClient.HTTPClient.get(url) 
-        unit_instance = Unit.Unit()
+        data_list = HTTPClient.get(url) 
+        unit_instance = Unit()
         units = data_list['units']
         units_list = []
         for unit in units:
