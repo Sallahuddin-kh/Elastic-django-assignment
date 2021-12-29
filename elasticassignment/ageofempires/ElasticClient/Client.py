@@ -38,7 +38,7 @@ class Client:
             "settings" : settings,
             'mappings' : mappings
         }
-        print("creating index...")
+        print("creating index "+ index_name)
         self.__connection.indices.create(index = index_name, body = request_body)
 
     def index_data(self,data:list):
@@ -47,5 +47,5 @@ class Client:
         Index information has to be included in 
         data list.
         """
-        print("Indexing data...")
+        print("Indexing data into " + str(data[1]["_index"]))
         bulk(self.__connection, data)
