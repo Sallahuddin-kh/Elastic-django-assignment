@@ -1,33 +1,16 @@
-import ageofempires.ElasticClient.Client as Client
-import ageofempires.ElasticClient.index_config as conf
+from ageofempires.models.BaseModel import BaseModel
 
-class Civilization():
-    """
-    Model class to manage the civilization data.
-    """
+class Civilization(BaseModel):
+
+    def set_index_name(self):
+        """
+        Sets an the index_name instance variable to model value
+        """
+        self.index_name = 'civilizations'
+
     def __init__(self):
         """
-        Constructor creates an instance with elasticsearch client
+        Constructor calls the parent constructor and then set_index_method
         """
-        self.client = Client.Client()
-
-    def bulk_index(self, data:list):
-        """
-        Inserts data into civilization index
-        """
-        self.client.index_data(data)
-
-    def make_index(self):
-        """
-        Creates the civilization index
-        """
-        settings = conf.get_index_settings()
-        mappings = conf.get_index_mappings('civilizations')
-        self.client.create_index('civilizations' , settings , mappings)
-
-    def get_objects(self):
-        """
-        Retrieves the civilization objects from
-        the index
-        """
-        return self.client.get_data('civilizations')
+        super().__init__()
+        self.set_index_name()
