@@ -49,6 +49,7 @@ class Command(BaseCommand):
         civilization_list = []
         for civlization in civilizations:
             civ = {
+                "_id": civlization['id'],
                 "_index" : "civilizations",
                 "_source" : civlization
             }
@@ -71,6 +72,7 @@ class Command(BaseCommand):
                 structure['structure_range'] = structure['range']
                 del structure['range']
             struc = {
+                "_id": structure['id'],
                 "_index": "structures",
                 "_source": structure
             }
@@ -90,6 +92,7 @@ class Command(BaseCommand):
         technologies_list = []
         for technology in technologies:
             tech = {
+                "_id": technology['id'],
                 "_index" : "technologies",
                 "_source" : technology
             }
@@ -112,6 +115,7 @@ class Command(BaseCommand):
                 unit['structure_range'] = unit['range']
                 del unit['range']
             uni = {
+                "_id": unit['id'],
                 "_index" : "units",
                 "_source" : unit
             }

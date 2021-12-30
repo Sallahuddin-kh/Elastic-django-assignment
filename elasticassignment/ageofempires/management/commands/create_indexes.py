@@ -11,11 +11,14 @@ class Command(BaseCommand):
     >> python manage.py create_indexes
     """
     def handle(self, *args, **kwargs):
-        civilization_instance = Civilization()
-        structure_instance = Structure()
-        technology_instance = Technology()
-        unit_instance = Unit()
-        civilization_instance.make_index()
-        structure_instance.make_index()
-        technology_instance.make_index()
-        unit_instance.make_index()
+        try:
+            civilization_instance = Civilization()
+            structure_instance = Structure()
+            technology_instance = Technology()
+            unit_instance = Unit()
+            civilization_instance.make_index()
+            structure_instance.make_index()
+            technology_instance.make_index()
+            unit_instance.make_index()
+        except Exception as e:
+            print(f"INDEX CREATION FAILED. {e}")

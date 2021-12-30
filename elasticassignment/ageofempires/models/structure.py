@@ -1,31 +1,9 @@
-import ageofempires.ElasticClient.Client as Client
-import ageofempires.ElasticClient.index_config as conf
+from ageofempires.models.BaseModel import BaseModel
 
-class Structure():
+class Structure(BaseModel):
 
-    def __init__(self):
+    def get_index_name(self):
         """
-        Constructor creates an instance with elasticsearch client
+        Gets the index_name according to model
         """
-        self.client = Client.Client()
-
-    def bulk_index(self, data:list):
-        """
-        Inserts data into Structure index
-        """
-        self.client.index_data(data)
-
-    def make_index(self):
-        """
-        Creates the Structure index
-        """
-        settings = conf.get_index_settings()
-        mappings = conf.get_index_mappings('structures')
-        self.client.create_index('structures', settings, mappings)
-
-    def get_objects(self):
-        """
-        Retrieves the Structure objects from
-        the index
-        """
-        return self.client.get_data('structures')
+        return 'structures'
