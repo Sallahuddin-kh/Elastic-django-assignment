@@ -21,4 +21,4 @@ class Command(BaseCommand):
             technology_instance.make_index()
             unit_instance.make_index()
         except Exception as e:
-            print("INDEX CREATION FAILED.")
+            print(f"INDEX CREATION FAILED. {e}")
